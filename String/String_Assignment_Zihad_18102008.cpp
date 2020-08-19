@@ -43,28 +43,47 @@ void PatMatching(string s)
     else cout<<"        No Matches"<<endl;    
 }
 
-char* BubSort(char* s)
+char* AscSort(char* s, int n)
 {
-    int n=0;
-    for(int i=0;s[i]!='\0';i++) n++;
+    int l=0;
+    for(int i=0;s[i]!='\0';i++) l++;
 
-    for(int i=0; i<n-1; i++)       
-       for(int j=0; j<n-i-1; j++)  
-           if (s[j] > s[j+1]) 
-              swap(s[j], s[j+1]);
+    int m=0;
+    for(int i=0; i<l-1; i++)       
+       for(int j=0; j<l-i-1; j++)  
+           if (s[j] > s[j+1]){
+              swap(s[j], s[j+1]); m++;
+               if(n==3) printf("After %d-th swap: %s\n", m, s);
+           }
+   
+    return s;
+}
+char* DesSort(char* s)
+{
+    int l=0;
+    for(int i=0;s[i]!='\0';i++) l++;
+
+    int m=0;
+    for(int i=0; i<l-1; i++)       
+       for(int j=0; j<l-i-1; j++)  
+           if (s[j] < s[j+1]){
+              swap(s[j], s[j+1]); m++;
+              printf("After %d-th swap: %s\n", m, s);
+           }
    
     return s;
 }
 
 int BinarySearch(char* s)
-{
+{   
+    int n=4;
     int length=0;
     for(int i=0;s[i]!='\0';i++)
     length++;
 
     printf("             Binary Search\n");
     printf("---------------------------------------\n");
-    char* sortedS=BubSort(s);
+    char* sortedS=AscSort(s, n);
     printf("Sorted list: %s\n", sortedS);
     printf("Enter the character you want to search- ");
     cin >> ws;
@@ -90,9 +109,10 @@ int main()
 {
     printf("Enter a string-\n");
     char s[200];
+    char temp[200];
     gets(s);
-
-    
+    strcpy(temp, s);
+    cout<<temp<<endl;
 
     while(true)
     {
@@ -103,10 +123,12 @@ int main()
     if(n==1) Strlength(s);
     else if(n==2) PatMatching(s);
     else if(n==3) 
-    {
-        printf("           Bubble Sort\n");
-        printf("----------------------------------\n");
-        printf("%s", BubSort(s));
+    {   
+        printf("___________Bubble Sort___________\n");
+        printf("Ascending Sort\n----------------------------------\n");
+        printf("Sorted List:::::: %s\n", AscSort(s, n));
+        printf("\nDescending Sort\n----------------------------------\n");
+        printf("Sorted List:::::: %s", DesSort(temp));
     }
 
     else if(n==4) 

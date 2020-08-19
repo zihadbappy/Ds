@@ -3,6 +3,7 @@
 #include<string.h>
 using namespace std;
 char s[200];
+int n;
 
 void Strlength()
 {   int length=0;
@@ -50,25 +51,33 @@ void PatMatching()
 
 char* AscBubSort()
 {
-    int n=0;
-    for(int i=0; s[i]!='\0'; i++) n++;
+    int l=0;
+    for(int i=0; s[i]!='\0'; i++) l++;
 
-    for(int i=0; i<n-1; i++)
-        for(int j=0; j<n-i-1; j++)
+    int m=0;
+    for(int i=0; i<l-1; i++)
+        for(int j=0; j<l-i-1; j++)
             if (s[j] > s[j+1])
-                swap(s[j], s[j+1]);
+            {
+                swap(s[j], s[j+1]); m++;
+                if(n==3)
+                    printf("After %d-th swap: %s\n", m, s);
+            }
     return s;
 }
 
 char* DesBubSort()
 {
-    int n=0;
+    int l=0;
     for(int i=0; s[i]!='\0'; i++) n++;
 
-    for(int i=0; i<n-1; i++)
-        for(int j=0; j<n-i-1; j++)
-            if (s[j] < s[j+1])
-                swap(s[j], s[j+1]);
+    int m=0;
+    for(int i=0; i<l-1; i++)
+        for(int j=0; j<l-i-1; j++)
+            if (s[j] < s[j+1]){
+                swap(s[j], s[j+1]); m++;
+                printf("After %d-th swap: %s\n",m, s);
+            }
     return s;
 }
 
@@ -80,7 +89,7 @@ int BinarySearch()
     printf("             Binary Search\n");
     printf("---------------------------------------\n");
     char* sortedS=AscBubSort();
-    printf("Sorted list: %s\n", sortedS);
+    printf("Sorted list: %s\n\n", sortedS);
     printf("Enter the character you want to search- ");
     cin >> ws;
     char key; scanf("%c",&key);
@@ -102,7 +111,6 @@ int main()
     gets(s);
     while(true)
     {
-        int n;
         printf("\n\nEnter the no. of operation you want to run:\n1. String Length\n2. Pattern Matching\n3. Bubble Sort\n4. Binary Search\n\n");
         scanf("%d", &n);
 
@@ -111,8 +119,8 @@ int main()
         else if(n==3)
         {
             printf("           Bubble Sort\n----------------------------------\n");
-            printf("Ascending Sort : %s\n", AscBubSort());
-            printf("Descending Sort: %s\n", DesBubSort());
+            printf("\nAscending Sort ::::: %s\n\n", AscBubSort());
+            printf("\nDescending Sort ::::: %s", DesBubSort());
         }
         else if(n==4)
         {   int ans=BinarySearch();
