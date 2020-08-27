@@ -112,7 +112,6 @@ int main()
     char temp[200];
     gets(s);
     strcpy(temp, s);
-    cout<<temp<<endl;
 
     while(true)
     {
